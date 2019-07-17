@@ -1,0 +1,34 @@
+version: '3.1'
+
+services: # configuring each container
+  db: # name of our mysql container
+    image: mysql:5.7 # which image to pull, in this case specifying v. 5.7
+    command: --max_allowed_packet=32505856      # Set max_allowed_packet to 256M (or any other value)
+    volumes: # data to map to the container
+      - ./data:/docker-entrypoint-initdb.d # looks for sql file to use, can't be compressed apparently
+    restart: always # always restart the container after reboot
+    environment: # environment variables -- mysql options in this case
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  SITE_wordpress: # name of our wordpress container
+    container_name: SITE_wordpress
+    depends_on: # container dependencies that need to be running first
+      - db
+    image: wordpress:latest # image used by our container
+    ports:
+      - "8080:80" # setting our ports for networking # @TODO figure out a way to make this project url based project.test
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306 # default mysql port
+      WORDPRESS_DB_PASSWORD: wordpress # matches the password set in the db container
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'http://localhost:8080');
+        define('WP_SITEURL', 'http://localhost:8080');
+        define('WP_ENV', 'development');
+    volumes: # this is where we tell Docker what to pay attention to
+      - ./site/wp-content/themes/SITETHEME:/var/www/html/wp-content/themes/SITETHEME # mapping our custom theme to the container
+      - ./site/wp-content/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
+      - ./data/uploads:/var/www/html/wp-content/uploads # map our uploads to the container
