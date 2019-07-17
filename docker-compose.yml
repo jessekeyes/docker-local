@@ -4,8 +4,6 @@ services: # configuring each container
   db: # name of our mysql container
     image: mysql:5.7 # which image to pull, in this case specifying v. 5.7
     command: --max_allowed_packet=32505856      # Set max_allowed_packet to 256M (or any other value)
-    env_file:
-      - .env.dev # config file, edit this with your prefs
     volumes: # data to map to the container
       - ./data:/docker-entrypoint-initdb.d # looks for sql file to use, can't be compressed apparently
     restart: always # always restart the container after reboot
@@ -19,8 +17,6 @@ services: # configuring each container
     depends_on: # container dependencies that need to be running first
       - db
     image: wordpress:latest # image used by our container
-      env_file:
-        - .env.dev # config file, edit this with your prefs
     ports:
       - "8080:80" # setting our ports for networking # @TODO figure out a way to make this project url based project.test
     restart: always
@@ -32,6 +28,9 @@ services: # configuring each container
         define('WP_SITEURL', 'http://localhost:8080');
         define('WP_ENV', 'development');
     volumes: # this is where we tell Docker what to pay attention to
-      - ./site/wp-content/themes/SITETHEME:/var/www/html/wp-content/themes/SITETHEME # mapping our custom theme to the container
+      - ./site/wp-content/themes/SITE_THEME:/var/www/html/wp-content/themes/SITE_THEME # mapping our custom theme to the container
       - ./site/wp-content/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
+      ## if you need to hold all of WP in the repo or it's just set up that way, comment out the above and uncomment below:
+      #- ./site:/var/www/html
+      ## keep uploads separated
       - ./data/uploads:/var/www/html/wp-content/uploads # map our uploads to the container
