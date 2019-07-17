@@ -4,6 +4,8 @@ services: # configuring each container
   db: # name of our mysql container
     image: mysql:5.7 # which image to pull, in this case specifying v. 5.7
     command: --max_allowed_packet=32505856      # Set max_allowed_packet to 256M (or any other value)
+    env_file:
+      - .env.dev # config file, edit this with your prefs
     volumes: # data to map to the container
       - ./data:/docker-entrypoint-initdb.d # looks for sql file to use, can't be compressed apparently
     restart: always # always restart the container after reboot
@@ -13,11 +15,12 @@ services: # configuring each container
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
 
-  SITE_wordpress: # name of our wordpress container
-    container_name: SITE_wordpress
+  wordpress: # name of our wordpress container
     depends_on: # container dependencies that need to be running first
       - db
     image: wordpress:latest # image used by our container
+      env_file:
+        - .env.dev # config file, edit this with your prefs
     ports:
       - "8080:80" # setting our ports for networking # @TODO figure out a way to make this project url based project.test
     restart: always
