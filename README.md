@@ -7,6 +7,19 @@
 * docker-compose
 
 
+## commands needed to run on first container load
+
+`docker exec -it name_of_wp_container /bin/bash`
+then:
+`chown www-data:www-data -R wp-content/plugins`
+`chown www-data:www-data -R wp-content/uploads`
+
+and whatever else you need to give permissions to, (but usually not the theme which the container doesn't have to write to...)
+
+This is to ensure the images will be loaded and used correctly locally.
+Need to see about running this automatically.
+
+
 
 ---------------
 
