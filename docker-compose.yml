@@ -27,6 +27,7 @@ services: # configuring each container
         define('WP_HOME', 'http://localhost:8080');
         define('WP_SITEURL', 'http://localhost:8080');
         define('WP_ENV', 'development');
+        define('FS_METHOD', 'direct');
     volumes: # this is where we tell Docker what to pay attention to
       - ./site/wp-content/themes/SITE_THEME:/var/www/html/wp-content/themes/SITE_THEME # mapping our custom theme to the container
       - ./site/wp-content/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
