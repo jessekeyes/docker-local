@@ -24,9 +24,9 @@
 then:
 (current process)
 
-`chown -R www-data:www-data -R wp-content/plugins`
-`chown www-data:www-data -R wp-content/uploads`
-`chown www-data:www-data -R wp-content`
+`chown www-data:www-data -R wp-content/plugins`
+`chown www-data:www-data wp-content/uploads` (if used)
+`chown www-data:www-data wp-content`
 
 Note non-recursives where needed
 
