@@ -14,8 +14,19 @@
 
 1. Set up a directory you want you project to live in.
 1. From within that dir clone the github project: `jessekeyes/docker-local`, or with `degit`, run: `degit jessekeyes/docker.local myprojectdir`
+1. This will create a project with this structure:
+```
+-myprojectdir
+
+- - data/
+- - site/
+- - .gitignore
+- - docker-compose.yml
+- - README.md
+
+```
 1. If the project already exists, copy SQL file, and uploads dir to the `.data`
-1. cd into the `site` and git checkout your project here.
+1. cd into the `site` and git checkout your project there.
 
 
 ## commands needed to run on first container load
