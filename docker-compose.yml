@@ -14,6 +14,8 @@ services: # configuring each container
       MYSQL_PASSWORD: wordpress
 
   wordpress: # name of our wordpress container
+    env_file:
+      - .env
     depends_on: # container dependencies that need to be running first
       - db
     image: wordpress:latest # image used by our container
@@ -23,14 +25,14 @@ services: # configuring each container
     environment:
       WORDPRESS_DB_HOST: db:3306 # default mysql port
       WORDPRESS_DB_PASSWORD: wordpress # matches the password set in the db container
-      WORDPRESS_TABLE_PREFIX: wp_ # update as needed per project
+      WORDPRESS_TABLE_PREFIX: ${TABLE_PREFIX} 
       WORDPRESS_CONFIG_EXTRA: |
-        define('WP_HOME', 'http://localhost:8080');
-        define('WP_SITEURL', 'http://localhost:8080');
-        define('WP_ENV', 'development');
+        define('WP_HOME', '${WP_HOME}');
+        define('WP_SITEURL', '${WP_SITEURL}');
+        define('WP_ENV', '${WP_ENV}');
         define('FS_METHOD', 'direct');
     volumes: # this is where we tell Docker what to pay attention to
-      - ./site/wp-content/themes/SITE_THEME:/var/www/html/wp-content/themes/SITE_THEME # mapping our custom theme to the container
+      - ./site/wp-content/themes/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
       - ./site/wp-content/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
       ## if you need to hold all of WP in the repo or it's just set up that way, comment out the above and uncomment below:
       #- ./site:/var/www/html

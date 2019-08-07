@@ -55,5 +55,3 @@ Need to see about running this automatically.
 
 * automate updated wp-content to user www-data
 ** docker exec -it <container name> /bin/bash
-* automate names here with config file
-* add url and port automatically
