@@ -16,7 +16,7 @@
 1. From within that dir clone the github project: `jessekeyes/docker-local`, or with `degit`, run: `degit jessekeyes/docker.local myprojectdir`
 1. This will create a project with this structure:
 ```
--myprojectdir
+- myprojectdir
 
 - - data/
 - - site/

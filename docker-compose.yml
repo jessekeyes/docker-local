@@ -23,6 +23,7 @@ services: # configuring each container
     environment:
       WORDPRESS_DB_HOST: db:3306 # default mysql port
       WORDPRESS_DB_PASSWORD: wordpress # matches the password set in the db container
+      WORDPRESS_TABLE_PREFIX: wp_ # update as needed per project
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_HOME', 'http://localhost:8080');
         define('WP_SITEURL', 'http://localhost:8080');
@@ -35,3 +36,6 @@ services: # configuring each container
       #- ./site:/var/www/html
       ## keep uploads separated
       - ./data/uploads:/var/www/html/wp-content/uploads # map our uploads to the container
+
+volumes: # persist the data for local dev
+  data:
