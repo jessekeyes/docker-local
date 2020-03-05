@@ -25,12 +25,12 @@ services: # configuring each container
     environment:
       WORDPRESS_DB_HOST: db:3306 # default mysql port
       WORDPRESS_DB_PASSWORD: wordpress # matches the password set in the db container
-      WORDPRESS_TABLE_PREFIX: ${TABLE_PREFIX} 
+      WORDPRESS_TABLE_PREFIX: ${TABLE_PREFIX}
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_HOME', '${WP_HOME}');
         define('WP_SITEURL', '${WP_SITEURL}');
         define('WP_ENV', '${WP_ENV}');
-        define('FS_METHOD', 'direct');
+        define('FS_METHOD', '${FS_METHOD}');
     volumes: # this is where we tell Docker what to pay attention to
       - ./site/wp-content/themes/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
       - ./site/wp-content/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
