@@ -32,7 +32,7 @@ Meant to create a local working environment that does not get in the way of your
 1. If the project already exists, copy SQL file, and uploads dir to the `.data`
 1. cd into the `site` and git checkout your project there.
 1. The project file structure should look something like this:
-
+```
 - myprojectdir
 - - data/
 - - - mydata.sql
@@ -41,6 +41,7 @@ Meant to create a local working environment that does not get in the way of your
 - - .gitignore
 - - docker-compose.yml
 - - README.md
+```
 
 From your project directory run: `docker-compose up`, and your container should be running! Note: large DBs will take a moment to copy over.
 
