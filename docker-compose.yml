@@ -38,7 +38,7 @@ services: # configuring each container
         define('WP_ENV', '${WP_ENV}');
         define('FS_METHOD', '${FS_METHOD}');
         define( 'WPS_DEBUG', true );
-     volumes: # this is where we tell Docker what to pay attention to (use SITE_PATH if needed)
+    volumes: # this is where we tell Docker what to pay attention to (use SITE_PATH if needed)
       - ./site/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
       - ./site/${SITE_THEME_PARENT}:/var/www/html/wp-content/themes/${SITE_THEME_PARENT} # mapping our custom theme to the container
       - ./site/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
