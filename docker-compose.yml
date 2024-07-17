@@ -1,5 +1,3 @@
-version: '3.5'
-
 services: # configuring each container
   db: # name of our mysql container
     image: mysql # default: latest; specify a version e.g. mysql:5.7
@@ -40,10 +38,12 @@ services: # configuring each container
         define('WP_ENV', '${WP_ENV}');
         define('FS_METHOD', '${FS_METHOD}');
         define( 'WPS_DEBUG', true );
-     volumes: # this is where we tell Docker what to pay attention to
+     volumes: # this is where we tell Docker what to pay attention to (use SITE_PATH if needed)
       - ./site/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
       - ./site/${SITE_THEME_PARENT}:/var/www/html/wp-content/themes/${SITE_THEME_PARENT} # mapping our custom theme to the container
       - ./site/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
+      ## if you need to control wp-config beyond the vars above
+      # - ./site/${SITE_PATH}/wp-config.php:/var/www/html/wp-config.php
       ## if you need to hold all of WP in the repo or it's just set up that way, comment out the above and uncomment below:
       #- ./site:/var/www/html
       ## keep uploads separated
