@@ -42,7 +42,7 @@ services: # configuring each container
       ## Default // if your repo is in another directory use SITE_PATH in the .env file e.g.: ./site/${SITE_PATH}/${SITE_THEME}:/var/www/html/..
       - ./site/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
       - ./site/${SITE_THEME_PARENT}:/var/www/html/wp-content/themes/${SITE_THEME_PARENT} # mapping our custom theme to the container
-      - ./site/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
+      - ./site/plugins:/var/www/html/wp-content/plugins # map our plugins to the container, change the dir name as needed
       ## Options
       # - ./site/${SITE_PATH}/wp-config.php:/var/www/html/wp-config.php # map to our wp-config file if we need more than the above
       ## if you need to hold all of WP in the repo or it's just set up that way, comment out the above and uncomment below:
