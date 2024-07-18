@@ -38,16 +38,17 @@ services: # configuring each container
         define('WP_ENV', '${WP_ENV}');
         define('FS_METHOD', '${FS_METHOD}');
         define( 'WPS_DEBUG', true );
-    volumes: # this is where we tell Docker what to pay attention to (use SITE_PATH if needed)
+    volumes: # this is where we tell Docker what to pay attention to
+      ## Default // if your repo is in another directory use SITE_PATH in the .env file e.g.: ./site/${SITE_PATH}/${SITE_THEME}:/var/www/html/..
       - ./site/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
       - ./site/${SITE_THEME_PARENT}:/var/www/html/wp-content/themes/${SITE_THEME_PARENT} # mapping our custom theme to the container
       - ./site/plugins:/var/www/html/wp-content/plugins # map our plugins to the container
-      ## if you need to control wp-config beyond the vars above
-      # - ./site/${SITE_PATH}/wp-config.php:/var/www/html/wp-config.php
+      ## Options
+      # - ./site/${SITE_PATH}/wp-config.php:/var/www/html/wp-config.php # map to our wp-config file if we need more than the above
       ## if you need to hold all of WP in the repo or it's just set up that way, comment out the above and uncomment below:
       #- ./site:/var/www/html
-      ## keep uploads separated
-      - ./data/uploads:/var/www/html/wp-content/uploads # map our uploads to the container
+      ## keep uploads separated, depends on the usage
+      # - ./data/uploads:/var/www/html/wp-content/uploads # map our uploads to the container
 
 volumes: # persist the data for local dev
   data:
