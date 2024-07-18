@@ -39,12 +39,12 @@ services: # configuring each container
         define('FS_METHOD', '${FS_METHOD}');
         define( 'WPS_DEBUG', true );
     volumes: # this is where we tell Docker what to pay attention to
-      ## Default // if your repo is in another directory use SITE_PATH in the .env file e.g.: ./site/${SITE_PATH}/${SITE_THEME}:/var/www/html/..
-      - ./site/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
-      - ./site/${SITE_THEME_PARENT}:/var/www/html/wp-content/themes/${SITE_THEME_PARENT} # mapping our custom theme to the container
+      ## FSAP Default // if your repo is in another directory use SITE_PATH in the .env file e.g.: ./site/${SITE_PATH}/${SITE_THEME}:/var/www/html/..
+      - ./site/${SITE_PATH}/${SITE_THEME}:/var/www/html/wp-content/themes/${SITE_THEME} # mapping our custom theme to the container
+      - ./site/${SITE_PATH}/wp-config.php:/var/www/html/wp-config.php # map to our wp-config file if we need more than the above
       - ./site/plugins:/var/www/html/wp-content/plugins # map our plugins to the container, change the dir name as needed
+      # - ./site/${SITE_THEME_PARENT}:/var/www/html/wp-content/themes/${SITE_THEME_PARENT} # mapping our custom parent theme to the container
       ## Options
-      # - ./site/${SITE_PATH}/wp-config.php:/var/www/html/wp-config.php # map to our wp-config file if we need more than the above
       ## if you need to hold all of WP in the repo or it's just set up that way, comment out the above and uncomment below:
       #- ./site:/var/www/html
       ## keep uploads separated, depends on the usage
