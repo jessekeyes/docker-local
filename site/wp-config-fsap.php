@@ -17,7 +17,7 @@ define('WP_SITEURL', 'http://localhost:8080');
 
 define('WP_HOME', 'http://localhost:8080');
 
-define('PROD_URL', 'https://www.petaindia.com');
+define('PROD_URL', 'https://wwwprodurlgoeshere.com');
 
 /* optional for your local */
 error_reporting( E_ALL );
