@@ -17,6 +17,8 @@ define('WP_SITEURL', 'http://localhost:8080');
 
 define('WP_HOME', 'http://localhost:8080');
 
+define('PROD_URL', 'https://www.petaindia.com');
+
 /* optional for your local */
 error_reporting( E_ALL );
 define( 'WP_DEBUG', false);
@@ -78,7 +80,7 @@ define( 'DISALLOW_FILE_EDIT', true ); // Disable File Editor - Security > Settin
  */
 
  function filter_image_url($url){
-	$liveurl = 'https://scienceadvancement.org'; // make this prod url of the project
+	$liveurl = PROD_URL; // make this prod url of the project
 	$localurl = WP_SITEURL;
 	$url = str_replace($localurl, $liveurl, $url);
 	return $url;
@@ -87,7 +89,7 @@ add_filter('wp_get_attachment_url', 'filter_image_url');
 
 // Replace srcset paths
 function filter_image_srcset($sources) {
-	$liveurl = 'https://scienceadvancement.org'; // make this prod url of the project
+	$liveurl = PROD_URL; // make this prod url of the project
 	$localurl = WP_SITEURL;
 
 	foreach( $sources as &$source )  {
